@@ -1,12 +1,16 @@
 #!/bin/bash
-INPUT_PATH="/home/mona/Workspace/CMPT-129/Assignment1/marktests"
-cd Codes/
+source ./config.sh
+cd $CODES_PATH
 for i in $(ls -d */); do
 	cd $i
+	echo $i "start"
+	rm -rf output
+	rm -rf pics
 	mkdir output
-	for j in `seq 1 4`; do
-	       	./roots < $INPUT_PATH/inCase$j.txt > output/outCase$j.txt 2> output/errCase$j.txt
-	done
+	./run > output/outCase.txt 2> output/errCase.txt
+	mkdir pics
+	mv *.bmp pics/
+	echo $i "done"
 	cd ..
 done
 
